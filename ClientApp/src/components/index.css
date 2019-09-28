@@ -2,6 +2,7 @@ h1 {
   text-align: center;
 }
 
-.view-more-link {
+.link:visited {
+  text-decoration: none;
   color: black;
 }

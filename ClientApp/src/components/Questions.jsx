@@ -20,7 +20,7 @@ const Questions = () => {
           <CardSubtitle>02/5/19</CardSubtitle>
           <CardText>This is a description</CardText>
           <Button>
-            <Link to={`/question.id`} className="view-more-link">
+            <Link to={`/question/id`} className="view-more-link">
               View More
             </Link>
           </Button>
