@@ -26,7 +26,7 @@ namespace SuncoastOverflow.Controllers
       return entry;
     }
 
-    [HttpPost("AllAnswers")]
+    [HttpGet("AllAnswers")]
     public ActionResult<IEnumerable<AnswerPost>> GetAll()
     {
       var all = context.AnswerPosts.OrderBy(a => a.Id);
