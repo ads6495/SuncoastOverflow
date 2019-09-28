@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Card,
   CardImg,
@@ -9,8 +9,19 @@ import {
   Button
 } from 'reactstrap'
 import { Form, FormGroup, Label, Input, FormText } from 'reactstrap'
+import Axios from 'axios'
 
 const Question = () => {
+  const [answerContent, setAnswerContent] = useState('')
+
+  const addComment = async () => {
+    const resp = await Axios.post(
+      'https://localhost:5001/api/controller/CreateAnswer',
+      answerContent
+    )
+    console.log('submitted')
+  }
+
   return (
     <div>
       <Card>
@@ -23,10 +34,20 @@ const Question = () => {
         <CardSubtitle>03/05/19</CardSubtitle>
         <CardBody>Do this then that</CardBody>
       </Card>
-      <Form>
+      <Form
+        onSubmit={e => {
+          e.preventDefault()
+          addComment()
+        }}
+      >
         <FormGroup>
           <Label>Add a Comment</Label>
-          <Input type="text" placeholder="Type here" />
+          <Input
+            type="text"
+            placeholder="Type here"
+            value={answerContent}
+            onChange={e => setAnswerContent(e.target.value)}
+          />
         </FormGroup>
         <Button>Submit</Button>
       </Form>

@@ -25,23 +25,23 @@ namespace SuncoastOverflow.Controllers
 
 
 
-    [HttpGet(AllAnswersJoin{Id})]
-    public ActionResult<IEnumerable<Object>> GetAnswers(Id)
-  {
-    var QuestionReturned = Context.QuestionPosts.Join(context.AnswerPosts, i => i.Id, l => l.QuestionPostId, (i, l) => new
-    {
+    //     [HttpGet(AllAnswersJoin{Id})]
+    //     public ActionResult<IEnumerable<Object>> GetAnswers(Id)
+    //   {
+    //     var QuestionReturned = Context.QuestionPosts.Join(context.AnswerPosts, i => i.Id, l => l.QuestionPostId, (i, l) => new
+    //     {
 
-      QuestionId = i.Id,
-      QuestionDescription = i.Description,
-
-
-    })
-
-    }
+    //       QuestionId = i.Id,
+    //       QuestionDescription = i.Description,
 
 
+    //     })
+
+    //     }
 
 
 
-}
+
+
+  }
 }
