@@ -2,6 +2,7 @@
 using System.Text.RegularExpressions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using SuncoastOverflow.Models;
 
 namespace suncoastoverflow
 {
@@ -28,7 +29,7 @@ namespace suncoastoverflow
       if (!optionsBuilder.IsConfigured)
       {
         var envConn = Environment.GetEnvironmentVariable("DATABASE_URL");
-        var conn = "server=localhost;database=SdgTemplate";
+        var conn = "server=localhost;database=StackOverflowDatabase";
         if (envConn != null)
         {
           conn = ConvertPostConnectionToConnectionString(envConn);
@@ -43,5 +44,7 @@ namespace suncoastoverflow
     {
       modelBuilder.HasAnnotation("ProductVersion", "2.2.0-rtm-35687");
     }
+    public DbSet<QuestionPost> QuestionPosts { get; set; }
+    public DbSet<AnswerPost> AnswerPosts { get; set; }
   }
 }
