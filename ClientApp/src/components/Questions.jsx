@@ -13,17 +13,17 @@ import './index.css'
 import Axios from 'axios'
 
 const Questions = () => {
-  // const [question, setQuestion] = useState('')
+  const [question, setQuestion] = useState('')
 
-  // const fetchQuestions = async () => {
-  //   const resp = await Axios.get('https://localhost:5001/api/Question/GetAll')
-  //   setQuestion(resp.data)
-  //   console.log(question)
-  // }
+  const fetchQuestions = async () => {
+    const resp = await Axios.get('https://localhost:5001/api/Question/GetAll')
+    setQuestion(resp.data)
+    console.log(question)
+  }
 
-  // useEffect(() => {
-  //   fetchQuestions()
-  // }, [])
+  useEffect(() => {
+    fetchQuestions()
+  }, [])
   return (
     <div>
       <Link to="/add-new">Add a Question!</Link>

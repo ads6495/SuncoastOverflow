@@ -19,8 +19,13 @@ const Question = () => {
       'https://localhost:5001/api/controller/CreateAnswer',
       answerContent
     )
+    console.log(resp.data)
     console.log('submitted')
   }
+
+  useEffect(() => {
+    addComment()
+  }, [])
 
   return (
     <div>

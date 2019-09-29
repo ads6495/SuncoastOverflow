@@ -1,9 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using suncoastoverflow;
 using SuncoastOverflow.Models;
-using static Microsoft.AspNetCore.Hosting.Internal.HostingApplication;
+using Microsoft.EntityFrameworkCore;
 
 namespace SuncoastOverflow.Controllers
 {
@@ -23,25 +24,39 @@ namespace SuncoastOverflow.Controllers
       return AllQuestions.ToList();
     }
 
+    [HttpGet("AllAnswersJoin{Id}")]
+    public ActionResult<IEnumerable<Object>> GetAnswers(int Id)
+    {
+      var QuestionReturned = context.QuestionPosts.Join(context.AnswerPosts, i => i.Id, l => l.QuestionPostId, (i, l) => new
+      {
 
+        QuestionId = i.Id,
+        QuestionDescription = i.Description,
+        QuestionContent = i.Content,
+        QuestionDate = i.DateOfPost,
+        QuestionPraise = i.PraisesForQuestion,
+        AnswerId = l.AnswerContent,
+        AnswerContent = l.AnswerContent,
+        AnswerPraise = l.PraisesForAnswer,
+        AnswerDate = l.DateOfPost,
+      }
+      ).Where(s => s.QuestionId == Id);
+      return QuestionReturned.ToList();
+    }
 
-    //     [HttpGet(AllAnswersJoin{Id})]
-    //     public ActionResult<IEnumerable<Object>> GetAnswers(Id)
-    //   {
-    //     var QuestionReturned = Context.QuestionPosts.Join(context.AnswerPosts, i => i.Id, l => l.QuestionPostId, (i, l) => new
-    //     {
+    [HttpPost("CreteQuestion")]
+    public ActionResult<QuestionPost> CreatePost([FromBody]QuestionPost entry)
+    {
+      context.QuestionPosts.Add(entry);
+      context.SaveChanges();
+      return entry;
+    }
 
-    //       QuestionId = i.Id,
-    //       QuestionDescription = i.Description,
-
-
-    //     })
-
-    //     }
-
-
-
-
-
+    [HttpGet("question{Id}")]
+    public ActionResult<IEnumerable<QuestionPost>> GetOneQuestion(int Id)
+    {
+      var post = context.QuestionPosts.Where(i => i.Id == Id);
+      return post.ToList();
+    }
   }
 }
